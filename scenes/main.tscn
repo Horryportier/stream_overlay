@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://1axspijg5cxc"]
+
+[ext_resource type="Texture2D" uid="uid://v8qnhw66rqic" path="res://assets/overlay_texture.png" id="1_o5qli"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OverlayTexture" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("1_o5qli")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="OverlayTexture"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OverlayTexture/StaticBody2D"]
+polygon = PackedVector2Array(-320, -180, -320, 180, 320, 180, 320, 30, 262, 30, 262, 126, 226, 126, 226, 144, 167, 144, 167, 142, 112, 142, 112, 150, 13, 150, 13, 132, -68, 132, -68, 148, -192, 148, -192, 154, -197, 154, -197, 126, -291, 126, -291, -167, -265, -167, -265, -171, -201, -171, -201, -180)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="OverlayTexture/StaticBody2D"]
+polygon = PackedVector2Array(-52, -180, -52, -159, 43, -159, 43, -180)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="OverlayTexture/StaticBody2D"]
+polygon = PackedVector2Array(92, -180, 92, -173, 134, -173, 134, -169, 231, -169, 231, -171, 242, -171, 242, -137, 274, -137, 274, -131, 320, -131, 320, -180)
