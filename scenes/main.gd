@@ -1,0 +1,4 @@
+extends Control
+
+func _ready() -> void:
+	RenderingServer.set_default_clear_color(Color.GREEN)

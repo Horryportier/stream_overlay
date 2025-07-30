@@ -23,6 +23,6 @@ window/size/resizable=false
 window/size/always_on_top=true
 window/stretch/mode="viewport"
 
-[rendering]
+[editor_plugins]
 
-environment/defaults/default_clear_color=Color(0, 1, 0, 1)
+enabled=PackedStringArray("res://addons/ldtk-importer/plugin.cfg")
