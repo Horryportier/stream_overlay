@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://d08u67c0rh73i"]
+
+[ext_resource type="Shader" uid="uid://bkctkgoyu53e" path="res://root.gdshader" id="1_dl66c"]
+[ext_resource type="Texture2D" uid="uid://b2wqrxfqnucan" path="res://assets/palette.png" id="2_2x50e"]
+[ext_resource type="Texture2D" uid="uid://dvuktrd1eqxdp" path="res://assets/tilemap_offset.png" id="2_5oewc"]
+[ext_resource type="Texture2D" uid="uid://fw14m517h7gq" path="res://tile_noise.tres" id="2_cyoj0"]
+
+[resource]
+shader = ExtResource("1_dl66c")
+shader_parameter/palette = ExtResource("2_2x50e")
+shader_parameter/offset_textrure = ExtResource("2_5oewc")
+shader_parameter/noise = ExtResource("2_cyoj0")
+shader_parameter/scale = 0.00195312
+shader_parameter/world_cords_scale = 1.0
+shader_parameter/palette_dimentions = Vector2(32, 255)

@@ -1,7 +1,65 @@
-[gd_scene load_steps=3 format=3 uid="uid://1axspijg5cxc"]
+[gd_scene load_steps=19 format=3 uid="uid://1axspijg5cxc"]
 
 [ext_resource type="Script" uid="uid://cde6nlxbrnoiu" path="res://scenes/main.gd" id="1_0wfyh"]
+[ext_resource type="Texture2D" uid="uid://kx40yobrgyyw" path="res://assets/background.png" id="2_jyhfs"]
+[ext_resource type="Shader" uid="uid://bkctkgoyu53e" path="res://root.gdshader" id="2_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://b2wqrxfqnucan" path="res://assets/palette.png" id="2_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://fw14m517h7gq" path="res://tile_noise.tres" id="3_choun"]
+[ext_resource type="Texture2D" uid="uid://w1hwohcicm7t" path="res://assets/icon.png" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://b3vqugch6ullm" path="res://scenes/levels/levels.ldtk" id="3_sugp2"]
+[ext_resource type="Texture2D" uid="uid://ba7a2qhsv4cxi" path="res://assets/background_Offset_000-sheet.png" id="4_choun"]
+[ext_resource type="Texture2D" uid="uid://c8jirlqw3kq1q" path="res://assets/tilemap.png" id="7_85g3d"]
+[ext_resource type="Texture2D" uid="uid://dvuktrd1eqxdp" path="res://assets/tilemap_offset.png" id="7_choun"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
+shader = ExtResource("2_o6xl0")
+shader_parameter/palette = ExtResource("2_tbgi4")
+shader_parameter/offset_textrure = ExtResource("4_choun")
+shader_parameter/noise = ExtResource("3_choun")
+shader_parameter/scale = 0.001
+shader_parameter/world_cords_scale = 1.0
+shader_parameter/palette_dimentions = Vector2(32, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ya4ey"]
+shader = ExtResource("2_o6xl0")
+shader_parameter/palette = ExtResource("2_tbgi4")
+shader_parameter/offset_textrure = ExtResource("7_choun")
+shader_parameter/noise = ExtResource("3_choun")
+shader_parameter/scale = 0.00195312
+shader_parameter/world_cords_scale = 1.0
+shader_parameter/palette_dimentions = Vector2(32, 255)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_choun"]
+atlas = ExtResource("7_85g3d")
+region = Rect2(272, 64, 32, 32)
+
+[sub_resource type="Gradient" id="Gradient_choun"]
+offsets = PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1)
+colors = PackedColorArray(1, 0.0588235, 0.266667, 1, 0.113725, 0.0588235, 1, 1, 0.0588235, 1, 0.956863, 1, 0.145098, 1, 0.0588235, 1, 0.572549, 1, 0.529412, 1, 1, 0.972549, 0.0588235, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ya4ey"]
+gradient = SubResource("Gradient_choun")
+
+[sub_resource type="Curve" id="Curve_eb6dy"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.82392, 0.982028), 0.0, 0.0, 0, 0, Vector2(1, 0.00641835), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_trceg"]
+curve = SubResource("Curve_eb6dy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a8y0u"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(400, 200, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+spread = 180.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_trceg")
+color_initial_ramp = SubResource("GradientTexture1D_ya4ey")
+turbulence_enabled = true
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -12,4 +70,71 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0wfyh")
 
+[node name="ColorRect2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_tefeu")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_jyhfs")
+stretch_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 15.0
+offset_right = 576.0
+offset_bottom = 320.0
+color = Color(1, 0, 0.862745, 1)
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(609, 31)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("3_jyhfs")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+zoom = Vector2(2, 2)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ya4ey")
+position = Vector2(37, 302)
+rotation = 1.01055
+texture = SubResource("AtlasTexture_choun")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ya4ey")
+position = Vector2(50, 308)
+rotation = -0.722566
+texture = SubResource("AtlasTexture_choun")
+flip_h = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ya4ey")
+position = Vector2(564, 304)
+rotation = -0.0138717
+texture = SubResource("AtlasTexture_choun")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ya4ey")
+position = Vector2(552, 41)
+rotation = 4.32024
+texture = SubResource("AtlasTexture_choun")
+
 [node name="levels" parent="." instance=ExtResource("3_sugp2")]
+metadata/_edit_lock_ = true
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(71, -53)
+rotation = -5.77704
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.9
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(318, 184)
+amount = 20
+lifetime = 5.0
+process_material = SubResource("ParticleProcessMaterial_a8y0u")
