@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://1axspijg5cxc"]
+[gd_scene load_steps=20 format=3 uid="uid://1axspijg5cxc"]
 
 [ext_resource type="Script" uid="uid://cde6nlxbrnoiu" path="res://scenes/main.gd" id="1_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://kx40yobrgyyw" path="res://assets/background.png" id="2_jyhfs"]
@@ -10,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://ba7a2qhsv4cxi" path="res://assets/background_Offset_000-sheet.png" id="4_choun"]
 [ext_resource type="Texture2D" uid="uid://c8jirlqw3kq1q" path="res://assets/tilemap.png" id="7_85g3d"]
 [ext_resource type="Texture2D" uid="uid://dvuktrd1eqxdp" path="res://assets/tilemap_offset.png" id="7_choun"]
+
+[sub_resource type="Gradient" id="Gradient_ya4ey"]
+offsets = PackedFloat32Array(0, 0.30137, 0.534247, 0.719178, 1)
+colors = PackedColorArray(0.9745, 1, 0.83, 1, 1, 0.88, 0.94, 1, 0.722, 0.7486, 0.95, 1, 0.92, 0.7084, 0.800093, 1, 0.972549, 1, 0.831373, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
 shader = ExtResource("2_o6xl0")
@@ -69,6 +73,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0wfyh")
+sun_color_over_time = SubResource("Gradient_ya4ey")
 
 [node name="ColorRect2" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_tefeu")
@@ -82,6 +87,7 @@ texture = ExtResource("2_jyhfs")
 stretch_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 31.0
 offset_top = 15.0
@@ -126,9 +132,12 @@ texture = SubResource("AtlasTexture_choun")
 [node name="levels" parent="." instance=ExtResource("3_sugp2")]
 metadata/_edit_lock_ = true
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+[node name="Sun" type="DirectionalLight2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(71, -53)
 rotation = -5.77704
+color = Color(0.969667, 1, 0.74, 1)
+energy = 0.5
 shadow_enabled = true
 shadow_filter = 1
 shadow_filter_smooth = 5.9
@@ -138,3 +147,8 @@ position = Vector2(318, 184)
 amount = 20
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_a8y0u")
+
+[node name="SunTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 60.0
+autostart = true

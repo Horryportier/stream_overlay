@@ -17,6 +17,6 @@ void fragment() {
 	vec4 noise_t = texture(noise, world_position * scale);
 	float offset = texture(offset_textrure, UV).r;
 	vec4 p_color = texture(palette, vec2(noise_t.r, offset));
-	COLOR.rgb = p_color.rgb;
+	COLOR.rgb =  offset == 0. ? t.rgb : p_color.rgb;
 }
 
