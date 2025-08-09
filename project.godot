@@ -27,6 +27,15 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/ldtk-importer/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "purple",
+"res://exports/": "red",
+"res://scenes/": "green",
+"res://scripts/": "yellow"
+}
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b86llfgpxhge7"]
+
+[ext_resource type="Script" uid="uid://bslxorgn4naew" path="res://scripts/Commponents/Pathfinding/pathfinding_commponent.gd" id="1_eyy6q"]
+
+[node name="PathfindingCommponent" type="Node2D"]
+script = ExtResource("1_eyy6q")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

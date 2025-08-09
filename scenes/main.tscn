@@ -1,11 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://1axspijg5cxc"]
+[gd_scene load_steps=19 format=3 uid="uid://1axspijg5cxc"]
 
 [ext_resource type="Script" uid="uid://cde6nlxbrnoiu" path="res://scenes/main.gd" id="1_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://kx40yobrgyyw" path="res://assets/background.png" id="2_jyhfs"]
 [ext_resource type="Shader" uid="uid://bkctkgoyu53e" path="res://root.gdshader" id="2_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://b2wqrxfqnucan" path="res://assets/palette.png" id="2_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://fw14m517h7gq" path="res://tile_noise.tres" id="3_choun"]
-[ext_resource type="Texture2D" uid="uid://w1hwohcicm7t" path="res://assets/icon.png" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://b3vqugch6ullm" path="res://scenes/levels/levels.ldtk" id="3_sugp2"]
 [ext_resource type="Texture2D" uid="uid://ba7a2qhsv4cxi" path="res://assets/background_Offset_000-sheet.png" id="4_choun"]
 [ext_resource type="Texture2D" uid="uid://c8jirlqw3kq1q" path="res://assets/tilemap.png" id="7_85g3d"]
@@ -19,6 +18,7 @@ colors = PackedColorArray(0.9745, 1, 0.83, 1, 1, 0.88, 0.94, 1, 0.722, 0.7486, 0
 shader = ExtResource("2_o6xl0")
 shader_parameter/palette = ExtResource("2_tbgi4")
 shader_parameter/offset_textrure = ExtResource("4_choun")
+shader_parameter/offset_offset = 12.0
 shader_parameter/noise = ExtResource("3_choun")
 shader_parameter/scale = 0.001
 shader_parameter/world_cords_scale = 1.0
@@ -28,6 +28,7 @@ shader_parameter/palette_dimentions = Vector2(32, 16)
 shader = ExtResource("2_o6xl0")
 shader_parameter/palette = ExtResource("2_tbgi4")
 shader_parameter/offset_textrure = ExtResource("7_choun")
+shader_parameter/offset_offset = 0.0
 shader_parameter/noise = ExtResource("3_choun")
 shader_parameter/scale = 0.00195312
 shader_parameter/world_cords_scale = 1.0
@@ -65,7 +66,9 @@ scale_curve = SubResource("CurveTexture_trceg")
 color_initial_ramp = SubResource("GradientTexture1D_ya4ey")
 turbulence_enabled = true
 
-[node name="Main" type="Control"]
+[node name="Root" type="Node"]
+
+[node name="Main" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -75,7 +78,7 @@ grow_vertical = 2
 script = ExtResource("1_0wfyh")
 sun_color_over_time = SubResource("Gradient_ya4ey")
 
-[node name="ColorRect2" type="TextureRect" parent="."]
+[node name="ColorRect2" type="TextureRect" parent="Main"]
 material = SubResource("ShaderMaterial_tefeu")
 layout_mode = 1
 anchors_preset = 15
@@ -86,69 +89,75 @@ grow_vertical = 2
 texture = ExtResource("2_jyhfs")
 stretch_mode = 1
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
+[node name="ColorRect" type="ColorRect" parent="Main"]
 layout_mode = 0
 offset_left = 31.0
 offset_top = 15.0
 offset_right = 576.0
 offset_bottom = 320.0
+scale = Vector2(2, 2)
 color = Color(1, 0, 0.862745, 1)
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(609, 31)
-scale = Vector2(0.125, 0.125)
-texture = ExtResource("3_jyhfs")
+[node name="World" type="Node2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(320, 180)
-zoom = Vector2(2, 2)
+[node name="Camera2D" type="Camera2D" parent="World"]
+anchor_mode = 0
 
-[node name="Sprite2D3" type="Sprite2D" parent="."]
+[node name="Sprite2D3" type="Sprite2D" parent="World"]
 material = SubResource("ShaderMaterial_ya4ey")
-position = Vector2(37, 302)
+position = Vector2(43, 605)
 rotation = 1.01055
 texture = SubResource("AtlasTexture_choun")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Sprite2D2" type="Sprite2D" parent="World"]
 material = SubResource("ShaderMaterial_ya4ey")
-position = Vector2(50, 308)
+position = Vector2(1256, 190)
 rotation = -0.722566
 texture = SubResource("AtlasTexture_choun")
 flip_h = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D5" type="Sprite2D" parent="World"]
 material = SubResource("ShaderMaterial_ya4ey")
-position = Vector2(564, 304)
-rotation = -0.0138717
+position = Vector2(1239, 225)
+rotation = 0.543736
 texture = SubResource("AtlasTexture_choun")
 
-[node name="Sprite2D4" type="Sprite2D" parent="."]
+[node name="Sprite2D6" type="Sprite2D" parent="World"]
 material = SubResource("ShaderMaterial_ya4ey")
-position = Vector2(552, 41)
-rotation = 4.32024
+position = Vector2(1239, 367)
+rotation = -0.0969155
 texture = SubResource("AtlasTexture_choun")
 
-[node name="levels" parent="." instance=ExtResource("3_sugp2")]
-metadata/_edit_lock_ = true
+[node name="Sprite2D" type="Sprite2D" parent="World"]
+material = SubResource("ShaderMaterial_ya4ey")
+position = Vector2(1138, 560)
+rotation = 0.637582
+texture = SubResource("AtlasTexture_choun")
 
-[node name="Sun" type="DirectionalLight2D" parent="."]
+[node name="Sprite2D4" type="Sprite2D" parent="World"]
+material = SubResource("ShaderMaterial_ya4ey")
+position = Vector2(516, 43)
+rotation = -1.96295
+texture = SubResource("AtlasTexture_choun")
+
+[node name="levels" parent="World" instance=ExtResource("3_sugp2")]
+
+[node name="Sun" type="DirectionalLight2D" parent="World"]
 unique_name_in_owner = true
-position = Vector2(71, -53)
-rotation = -5.77704
+rotation = 0.506145
 color = Color(0.969667, 1, 0.74, 1)
 energy = 0.5
 shadow_enabled = true
 shadow_filter = 1
 shadow_filter_smooth = 5.9
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="World"]
 position = Vector2(318, 184)
 amount = 20
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_a8y0u")
 
-[node name="SunTimer" type="Timer" parent="."]
+[node name="SunTimer" type="Timer" parent="World"]
 unique_name_in_owner = true
-wait_time = 60.0
+wait_time = 1200.0
 autostart = true

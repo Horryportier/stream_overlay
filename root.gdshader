@@ -1,6 +1,7 @@
 shader_type canvas_item;
 uniform sampler2D palette: filter_nearest;
 uniform sampler2D offset_textrure: repeat_enable, filter_nearest;
+uniform float offset_offset = 0;
 uniform sampler2D noise: repeat_enable, filter_nearest;
 uniform float scale = 0.001953125;
 uniform float world_cords_scale;
@@ -13,9 +14,10 @@ void vertex() {
 }
 
 void fragment() {
+	float offset_offset_normalized = (1. / 256.) * offset_offset;
  	vec4 t = texture(TEXTURE, UV);
 	vec4 noise_t = texture(noise, world_position * scale);
-	float offset = texture(offset_textrure, UV).r;
+	float offset = texture(offset_textrure, UV).r + offset_offset_normalized;
 	vec4 p_color = texture(palette, vec2(noise_t.r, offset));
 	COLOR.rgb =  offset == 0. ? t.rgb : p_color.rgb;
 }

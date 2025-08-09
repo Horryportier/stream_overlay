@@ -9,6 +9,7 @@
 shader = ExtResource("1_dl66c")
 shader_parameter/palette = ExtResource("2_2x50e")
 shader_parameter/offset_textrure = ExtResource("2_5oewc")
+shader_parameter/offset_offset = 0.0
 shader_parameter/noise = ExtResource("2_cyoj0")
 shader_parameter/scale = 0.00195312
 shader_parameter/world_cords_scale = 1.0
