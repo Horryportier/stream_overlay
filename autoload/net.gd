@@ -2,6 +2,8 @@ extends Node
 
 signal command_request(id: int, data: Dictionary)
 
+const PORT: = 6969
+
 enum {
 	INVALID,
 	SET_GREENS_SCREEN_VISIBILITY,
@@ -14,7 +16,7 @@ var message_queue : Array[String]
 
 func _ready() -> void:	
 	tcp_server = TCPServer.new()
-	tcp_server.listen(42069)
+	tcp_server.listen(PORT)
 
 func _physics_process(_delta: float) -> void:
 	if !tcp_server.is_listening(): 
