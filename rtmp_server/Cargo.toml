@@ -1,0 +1,11 @@
+[package]
+name = "rtmp_server"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.98"
+log = "0.4.27"
+rtmp = "0.6.5"
+streamhub = "0.2.4"
+tokio = "1.47.1"

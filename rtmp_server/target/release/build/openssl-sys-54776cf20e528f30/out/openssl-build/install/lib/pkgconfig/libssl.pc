@@ -1,0 +1,11 @@
+prefix=/home/horry/streaming/stream_overlay/rtmp_server/target/release/build/openssl-sys-54776cf20e528f30/out/openssl-build/install
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include 
+
+Name: OpenSSL-libssl
+Description: Secure Sockets Layer and cryptography libraries
+Version: 3.5.2
+Requires.private: libcrypto
+Libs: -L${libdir} -lssl
+Cflags: -I${includedir}
