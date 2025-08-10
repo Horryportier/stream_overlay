@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://1axspijg5cxc"]
+[gd_scene load_steps=21 format=3 uid="uid://1axspijg5cxc"]
 
 [ext_resource type="Script" uid="uid://cde6nlxbrnoiu" path="res://scenes/main.gd" id="1_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://kx40yobrgyyw" path="res://assets/background.png" id="2_jyhfs"]
@@ -6,9 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://b2wqrxfqnucan" path="res://assets/palette.png" id="2_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://fw14m517h7gq" path="res://tile_noise.tres" id="3_choun"]
 [ext_resource type="PackedScene" uid="uid://b3vqugch6ullm" path="res://scenes/levels/levels.ldtk" id="3_sugp2"]
+[ext_resource type="Texture2D" uid="uid://bgc718slqtmqs" path="res://assets/tess_noise.png" id="3_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://ba7a2qhsv4cxi" path="res://assets/background_Offset_000-sheet.png" id="4_choun"]
 [ext_resource type="Texture2D" uid="uid://c8jirlqw3kq1q" path="res://assets/tilemap.png" id="7_85g3d"]
 [ext_resource type="Texture2D" uid="uid://dvuktrd1eqxdp" path="res://assets/tilemap_offset.png" id="7_choun"]
+[ext_resource type="Script" uid="uid://da71q6mrkgcy2" path="res://scenes/debug.gd" id="11_ya4ey"]
 
 [sub_resource type="Gradient" id="Gradient_ya4ey"]
 offsets = PackedFloat32Array(0, 0.30137, 0.534247, 0.719178, 1)
@@ -19,7 +21,7 @@ shader = ExtResource("2_o6xl0")
 shader_parameter/palette = ExtResource("2_tbgi4")
 shader_parameter/offset_textrure = ExtResource("4_choun")
 shader_parameter/offset_offset = 12.0
-shader_parameter/noise = ExtResource("3_choun")
+shader_parameter/noise = ExtResource("3_ya4ey")
 shader_parameter/scale = 0.001
 shader_parameter/world_cords_scale = 1.0
 shader_parameter/palette_dimentions = Vector2(32, 16)
@@ -89,7 +91,8 @@ grow_vertical = 2
 texture = ExtResource("2_jyhfs")
 stretch_mode = 1
 
-[node name="ColorRect" type="ColorRect" parent="Main"]
+[node name="GreenScreen" type="ColorRect" parent="Main"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 31.0
 offset_top = 15.0
@@ -141,6 +144,7 @@ rotation = -1.96295
 texture = SubResource("AtlasTexture_choun")
 
 [node name="levels" parent="World" instance=ExtResource("3_sugp2")]
+rect = Rect2i(0, 0, 640, 360)
 
 [node name="Sun" type="DirectionalLight2D" parent="World"]
 unique_name_in_owner = true
@@ -161,3 +165,20 @@ process_material = SubResource("ParticleProcessMaterial_a8y0u")
 unique_name_in_owner = true
 wait_time = 1200.0
 autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Debug" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_ya4ey")
+
+[node name="NetQueueLabel" type="Label" parent="CanvasLayer/Debug"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 23.0
